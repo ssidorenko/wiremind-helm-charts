@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shared-data-pvc
+spec:
+  accessModes:
+    - ReadWriteMany  # Allows multiple pods to access this PVC
+  resources:
+    requests:
+      storage: 500Gi  # Adjust the size based on your needs
+  storageClassName: "jelastic-dynamic-volume"

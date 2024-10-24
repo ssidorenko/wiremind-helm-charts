@@ -110,5 +110,12 @@ spec:
           {{- with .Values.coordinator.resources }}
           resources: {{- toYaml . | nindent 12 }}
           {{- end }}
+          volumeMounts:
+            - mountPath: /opt/data
+              name: data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: shared-data-pvc
 
 {{- end }}

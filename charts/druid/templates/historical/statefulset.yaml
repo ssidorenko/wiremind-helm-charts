@@ -141,7 +141,7 @@ spec:
             {{- toYaml $historicalDefaults.resources | nindent 12 }}
             {{- end }}
           volumeMounts:
-            - mountPath: /opt/druid/var
+            - mountPath: /opt/data
               name: data
       {{- if not $historicalDefaults.persistence.enabled }}
       volumes:
@@ -149,18 +149,10 @@ spec:
         emptyDir: {}
       {{- end }}
   {{- if $historicalDefaults.persistence.enabled }}
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        {{- with $historicalDefaults.persistence.storageClass }}
-        storageClassName: {{ . }}
-        {{- end }}
-        resources:
-          requests:
-            storage: "{{ $tierValue.persistence.size }}"
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: shared-data-pvc  # This should match the PVC name you created
   {{- end }}
 
 {{- end }}

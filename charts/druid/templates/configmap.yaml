@@ -7,6 +7,8 @@ metadata:
   labels:
     {{- include "druid.common-labels" . | nindent 4 }}
 data:
+  jets3t.properties:
+    s3service.disable-dns-buckets=false
   {{- $configVars := .Values.configVars }}
   {{- if .Values.zookeeper.enabled }}
   druid_zk_service_host: {{ .Release.Name }}-zookeeper:{{ .Values.zookeeper.service.ports.client }}

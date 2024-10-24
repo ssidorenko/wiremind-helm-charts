@@ -155,10 +155,10 @@ router:
   ingress:
     enabled: false
     annotations:
-      nginx.ingress.kubernetes.io/auth-realm: Authentication Required
-      nginx.ingress.kubernetes.io/auth-secret: basic-auth
-      nginx.ingress.kubernetes.io/auth-type: basic
-      kubernetes.io/tls-acme: "false"
+      # nginx.ingress.kubernetes.io/auth-realm: Authentication Required
+      # nginx.ingress.kubernetes.io/auth-secret: basic-auth
+      # nginx.ingress.kubernetes.io/auth-type: basic
+      # kubernetes.io/tls-acme: "false"
     path: /
   resources: {}
   priorityClassName: ""
@@ -379,8 +379,8 @@ historical:
     default:
       # enabled: false
       envVars:
-        DRUID_XMX: 256m
-        DRUID_XMS: 256m
+        DRUID_XMX: 4096m
+        DRUID_XMS: 1024m
         DRUID_MAXDIRECTMEMORYSIZE: 400m
 
         druid_server_tier: "tier_default"
